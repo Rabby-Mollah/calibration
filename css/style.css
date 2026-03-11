@@ -1,0 +1,175 @@
+ <style>
+        /* --- CSS START --- */
+        :root {
+            --primary-orange: #ff6b00;
+            --primary-cyan: #00d9e6;
+            --bg-dark: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f0f0f0;
+            --text-muted: #b3b3b3;
+            --gradient-main: linear-gradient(135deg, var(--primary-orange), var(--primary-cyan));
+            --gradient-reverse: linear-gradient(135deg, var(--primary-cyan), var(--primary-orange));
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out;
+            line-height: 1.6;
+        }
+        body.loading { opacity: 0; }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        p { font-weight: 400; font-size: 0.95rem; }
+
+        .gradient-text {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .btn:hover { transform: translateY(-3px); }
+        .btn-gradient { background: var(--gradient-main); color: #fff; box-shadow: 0 8px 15px rgba(255, 107, 0, 0.2); }
+        .btn-gradient:hover { box-shadow: 0 12px 25px rgba(0, 217, 230, 0.3); }
+        .btn-cyan { background: transparent; border: 2px solid var(--primary-cyan); color: var(--primary-cyan); }
+        .btn-cyan:hover { background: var(--primary-cyan); color: var(--bg-dark); }
+        .btn-orange { background: var(--primary-orange); color: #fff; border: 2px solid var(--primary-orange); }
+        .btn-orange:hover { background: #e66000; border-color: #e66000; }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .hero-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.6), rgba(10, 10, 15, 0.95)),
+                        linear-gradient(45deg, rgba(255, 107, 0, 0.15), rgba(0, 217, 230, 0.15));
+        }
+        .hero-content { text-align: center; z-index: 1; padding: 0 20px; width: 100%; max-width: 800px; }
+        .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); margin-bottom: 1rem; letter-spacing: 1px; }
+        .hero-tagline { font-size: clamp(1rem, 3vw, 1.5rem); color: var(--text-muted); margin-bottom: 2.5rem; }
+
+        .fade-in { opacity: 0; transform: translateY(30px); animation: fadeInUp 1s forwards ease-out; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        .section-separator { height: 2px; background: var(--gradient-main); width: 100%; opacity: 0.3; }
+
+        .events { padding: 5rem 0; }
+        .section-title { font-size: clamp(2.5rem, 5vw, 3.5rem); text-align: center; margin-bottom: 3.5rem; }
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .event-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 217, 230, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 217, 230, 0.1);
+        }
+        .card-img-wrapper { width: 100%; height: 200px; overflow: hidden; flex-shrink: 0; }
+        .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .event-card:hover .card-img-wrapper img { transform: scale(1.08); }
+        .card-content { padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-content h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #fff; }
+        .card-content p {
+            color: var(--text-muted); margin-bottom: 1.5rem; flex-grow: 1;
+            display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .fee-notice {
+            font-weight: 600; color: var(--primary-cyan); margin-bottom: 1.5rem; font-size: 0.9rem;
+            background: rgba(0, 217, 230, 0.1); padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-block; align-self: flex-start;
+        }
+        .card-actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: auto; }
+        .card-actions .btn { flex: 1 1 calc(50% - 0.4rem); padding: 0.7rem 0.5rem; font-size: 0.85rem; }
+
+        .contacts { background: var(--gradient-reverse); padding: 5rem 0; position: relative; }
+        .contacts .text-dark { color: var(--bg-dark); }
+        .contacts .text-white { color: #fff; }
+        .contact-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 16px; padding: 2.5rem 1.5rem;
+            text-align: center; width: 100%; max-width: 350px; transition: var(--transition-smooth); color: #fff;
+        }
+        .contact-card:hover { transform: translateY(-5px); background: rgba(255, 255, 255, 0.2); }
+        .contact-icon { font-size: 2.5rem; margin-bottom: 1rem; color: var(--bg-dark); }
+        .contact-card h3 { font-size: 1.5rem; color: var(--bg-dark); }
+        .contact-card .role { font-weight: 600; color: #fff; margin-bottom: 1.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .contact-info p { margin-bottom: 0.5rem; font-size: 0.95rem; color: var(--bg-dark); font-weight: 500; }
+        .contact-info i { width: 25px; color: #fff; }
+        
+        .social-links { margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem; }
+        .social-links a {
+            display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+            background: var(--bg-dark); border-radius: 50%; color: #fff; text-decoration: none; transition: var(--transition-smooth);
+        }
+        .social-links a:hover { background: #fff; color: var(--primary-cyan); transform: scale(1.1); }
+
+        .scroll-top-btn {
+            position: fixed; bottom: 20px; right: 20px; width: 45px; height: 45px;
+            background: var(--gradient-main); color: #fff; border: none; border-radius: 50%;
+            font-size: 1rem; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            opacity: 0; visibility: hidden; transform: translateY(20px); transition: var(--transition-smooth); z-index: 99;
+        }
+        .scroll-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 480px) {
+            .card-actions .btn { flex: 1 1 100%; }
+        }
+        /* --- CSS END --- */
+    </style>
