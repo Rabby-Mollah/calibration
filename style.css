@@ -62,44 +62,57 @@ body.loading { opacity: 0; }
 }
 
 /* --- Mobile Specific Ratio Fix --- */
+
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 0; /* Slimmer nav on mobile to save space */
+    }
+
     .hero {
-        /* Instead of a fixed 100vh which crops wide photos, 
-           we let the height be determined by the 16:9 ratio */
-        min-height: auto; 
-        aspect-ratio: 16 / 9; /* Forces the container to match your photo */
-        padding-top: 100px;
-        padding-bottom: 40px;
+        /* We change from 16/9 ratio to a slightly taller "Safe Ratio" 
+           to accommodate both the photo and the text below the nav */
+        min-height: 70vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* Aligns content from the top down */
+        padding-top: 140px; /* HEAVY padding to push text way below the Nav Bar */
+        padding-bottom: 60px;
     }
 
     .hero-bg img {
-        object-fit: contain; /* Shows the WHOLE photo without cropping */
-        background-color: var(--bg-dark); /* Fills any tiny gaps */
+        object-fit: cover; 
+        object-position: center 10%; /* Shows the top-center of your 16:9 photo */
     }
 
     .hero-content {
-        margin-top: 0;
-        padding-bottom: 20px;
+        margin-top: 20px;
+        padding: 0 15px;
+        position: relative;
+        z-index: 5;
     }
 
     .hero-title {
-        font-size: 2.2rem; /* Shrinks title slightly so it fits inside the 16:9 area */
+        font-size: 2.2rem; /* Compact title for mobile */
+        line-height: 1.1;
+        margin-bottom: 15px;
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    /* Fix for the Event Buttons on Mobile */
+    .card-actions {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .card-actions .btn {
+        width: 100%; /* Full width buttons are much easier to tap on phones */
+        padding: 12px;
     }
 }
-.hero-overlay { 
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-    background: linear-gradient(to bottom, rgba(10,10,15,0.4) 0%, var(--bg-dark) 95%); 
-}
-
-.hero-content { 
-    text-align: center; 
-    padding: 2rem 20px; 
-    z-index: 2;
-    margin-top: 40px; /* Extra manual push down for the text */
-}
-
-.hero-title { font-size: clamp(2.5rem, 8vw, 5.5rem); margin-bottom: 1rem; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.hero-tagline { font-size: clamp(1rem, 2.5vw, 1.3rem); color: var(--text-muted); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
 
 /* Buttons */
 .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition); text-align: center; cursor: pointer; }
