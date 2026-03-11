@@ -1,224 +1,254 @@
+/* --- Variables & Reset --- */
 :root {
     --primary-orange: #ff6b00;
     --primary-cyan: #00d9e6;
     --bg-dark: #0a0a0f;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.08);
-    --text-main: #f0f0f0;
-    --text-muted: #b3b3b3;
+    --card-bg: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+    --nav-height: 70px;
     --gradient-main: linear-gradient(135deg, var(--primary-orange), var(--primary-cyan));
-    --gradient-reverse: linear-gradient(135deg, var(--primary-cyan), var(--primary-orange));
-    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
-body.loading { opacity: 0; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 1.5rem; }
-.gradient-text { background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+html {
+    scroll-behavior: smooth;
+}
 
-/* Navbar */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* --- Global Components --- */
+.gradient-text {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-gradient { background: var(--gradient-main); color: white; }
+.btn-cyan { border: 2px solid var(--primary-cyan); color: var(--primary-cyan); }
+.btn-cyan:hover { background: var(--primary-cyan); color: black; }
+.btn-orange { background: var(--primary-orange); color: white; }
+
+/* --- Navigation Bar --- */
 .navbar {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    background: rgba(10, 10, 15, 0.75); 
-    backdrop-filter: blur(20px); 
-    -webkit-backdrop-filter: blur(20px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-height);
+    z-index: 1000;
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
 }
-.nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; max-width: 1400px; margin: 0 auto; }
-.nav-logo { font-weight: 700; font-size: 1.5rem; text-decoration: none; color: #fff; letter-spacing: 1px; }
-.nav-links a { text-decoration: none; color: #fff; margin-left: 2rem; font-weight: 500; font-size: 0.9rem; transition: 0.3s; opacity: 0.8; }
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
 .nav-links a:hover { opacity: 1; color: var(--primary-cyan); }
 
-/* Hero Section - Fixed for 16:9 and Positioning */
-/* --- Updated Hero Section for Ratio Compatibility --- */
-.hero { 
-    position: relative; 
+/* --- Hero Section (The Fix) --- */
+.hero {
     width: 100%;
-    min-height: 100vh; /* PC still gets full screen */
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    padding-top: var(--nav-height); /* Ensure content starts AFTER navbar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-bg {
+    width: 100%;
+    max-width: 1400px; /* Limits width on ultra-wide PC screens */
+    aspect-ratio: 16 / 9; /* FORCES YOUR 16:9 RATIO */
     overflow: hidden;
-    padding-top: 80px; 
+    position: relative;
 }
 
-.hero-bg { 
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    z-index: -1; 
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fills the 16:9 box perfectly */
 }
 
-.hero-bg img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    object-position: center; 
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, var(--bg-dark));
 }
 
-/* --- Mobile Specific Ratio Fix --- */
+.hero-content {
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 800px;
+}
 
-/* --- Final Mobile-First Responsive Fix --- */
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+}
+
+/* --- Events Grid (1:1 Ratio) --- */
+.events { padding: 5rem 0; }
+.section-title { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.event-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.event-card:hover { transform: translateY(-10px); border-color: var(--primary-cyan); }
+
+.card-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* FORCES 1:1 SQUARE IMAGES */
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+.card-content p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; flex-grow: 1; }
+
+.fee-notice {
+    font-weight: 700;
+    color: var(--primary-cyan);
+    background: rgba(0, 217, 230, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    align-self: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.card-actions {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.card-actions .btn { flex: 1; padding: 0.7rem 0.2rem; font-size: 0.8rem; }
+
+/* --- Contacts --- */
+.contacts { background: linear-gradient(135deg, var(--primary-cyan), var(--primary-orange)); padding: 5rem 0; }
+.contact-card {
+    background: white;
+    color: black;
+    padding: 3rem;
+    border-radius: 25px;
+    text-align: center;
+    max-width: 450px;
+    margin: 0 auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* --- Mobile Overrides --- */
 @media (max-width: 768px) {
-    /* 1. Make the Navbar solid or very dark so it doesn't clash with the photo */
-    .navbar {
-        position: relative; /* No longer floating over the photo on mobile */
-        background: var(--bg-dark);
-        padding: 1rem 0;
-    }
-
-    .nav-container {
-        padding: 0 1.5rem;
-        justify-content: center; /* Centers logo for a cleaner mobile look */
-    }
-
-    .nav-links {
-        display: none; /* Keep links hidden for now unless you want a burger menu */
-    }
-
-    /* 2. Fix the Hero Section to show the FULL 16:9 Photo */
+    .nav-links { display: none; } /* Standard for mobile without burger menu */
+    
     .hero {
-        display: block; /* Stack elements vertically */
-        min-height: auto;
-        padding-top: 0; 
-        background: var(--bg-dark);
+        padding-top: var(--nav-height); /* Stays below nav */
     }
 
     .hero-bg {
-        position: relative; /* Move it back into the normal flow */
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9; /* FORCES the 16:9 shape */
+        aspect-ratio: 16 / 9; /* Guaranteed 16:9 on mobile */
     }
 
-    .hero-bg img {
-        position: relative;
-        object-fit: contain; /* SHOWS EVERY PIXEL of your 16:9 photo */
-        width: 100%;
-        height: auto;
-    }
-
-    .hero-overlay {
-        /* Subtle fade only at the bottom to transition into the text area */
-        background: linear-gradient(to bottom, transparent 70%, var(--bg-dark) 100%);
-    }
-
-    /* 3. Move the Text BELOW the photo so it never covers the image */
-    .hero-content {
-        position: relative;
-        margin-top: -20px; /* Slight overlap for a modern look */
-        padding: 2rem 1.5rem;
-        z-index: 10;
-        background: var(--bg-dark);
-    }
-
-    .hero-title {
-        font-size: 2.5rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .hero-tagline {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        color: var(--text-muted);
-    }
-
-    /* 4. Fix Event Card spacing for mobile */
+    .hero-title { font-size: 2.2rem; }
+    
     .events-grid {
-        gap: 1.5rem;
+        grid-template-columns: 1fr; /* Single column on mobile */
     }
 
     .card-actions {
-        flex-direction: column;
+        flex-direction: column; /* Stack buttons on phone */
     }
-
-    .card-actions .btn {
-        width: 100%;
-    }
-}
-/* Buttons */
-.btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition); text-align: center; cursor: pointer; }
-.btn-gradient { background: var(--gradient-main); color: #fff; border: none; }
-.btn-cyan { border: 2px solid var(--primary-cyan); color: var(--primary-cyan); background: transparent; }
-.btn-cyan:hover { background: var(--primary-cyan); color: #000; }
-.btn-orange { background: var(--primary-orange); color: #fff; border: 2px solid var(--primary-orange); }
-
-/* Event Cards - Fixed for 1:1 (Square) Photos */
-.events { padding: 5rem 0; }
-.events-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); 
-    gap: 2.5rem; 
-}
-
-.event-card { 
-    background: var(--card-bg); 
-    border: 1px solid var(--card-border); 
-    border-radius: 24px; 
-    overflow: hidden; 
-    backdrop-filter: blur(15px); 
-    display: flex; 
-    flex-direction: column; 
-    transition: var(--transition); 
-}
-
-.card-img-wrapper { 
-    width: 100%;
-    aspect-ratio: 1 / 1; /* Forces the image container to be a perfect square */
-    overflow: hidden; 
-}
-
-.card-img-wrapper img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; /* Ensures your 1:1 photos fill the square perfectly */
-    transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.event-card:hover { transform: translateY(-12px); border-color: var(--primary-cyan); box-shadow: 0 20px 40px rgba(0, 217, 230, 0.1); }
-.event-card:hover img { transform: scale(1.08); }
-
-.card-content { padding: 1.8rem; flex-grow: 1; display: flex; flex-direction: column; }
-.card-content h3 { font-size: 1.4rem; margin-bottom: 0.6rem; color: #fff; }
-.card-content p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex-grow: 1; }
-
-.fee-notice { 
-    font-weight: 700; color: var(--primary-cyan); background: rgba(0,217,230,0.1); 
-    padding: 6px 14px; border-radius: 8px; align-self: flex-start; margin-bottom: 1.5rem; font-size: 0.85rem;
-}
-
-.card-actions { display: flex; gap: 12px; }
-.card-actions .btn { flex: 1; padding: 0.7rem 0.5rem; font-size: 0.85rem; }
-
-/* Footer/Contact */
-.contacts { background: var(--gradient-reverse); padding: 5rem 0; }
-.contact-card { 
-    background: rgba(255,255,255,0.1); padding: 3rem 2rem; border-radius: 24px; 
-    text-align: center; color: #fff; width: 100%; max-width: 400px; margin: 0 auto; 
-    backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2);
-}
-.contact-card h3, .contact-card .contact-info p { color: #000; font-weight: 600; }
-.contact-card .role { color: #fff; background: rgba(0,0,0,0.2); display: inline-block; padding: 2px 12px; border-radius: 20px; margin-bottom: 1rem; }
-
-/* Scroll Top Button */
-.scroll-top-btn { 
-    position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; 
-    border-radius: 50%; background: var(--gradient-main); border: none; color: #fff; 
-    cursor: pointer; visibility: hidden; opacity: 0; transition: 0.3s; z-index: 999; 
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-.scroll-top-btn.show { visibility: visible; opacity: 1; }
-
-/* --- Mobile Logic --- */
-@media (max-width: 768px) {
-    .nav-links { display: none; } /* Keeps it clean for Apple-style look */
-    .hero { padding-top: 60px; }
-    .hero-content { margin-top: 20px; }
-    .card-actions { flex-direction: column; } /* Stacks buttons on mobile */
-    .event-card { border-radius: 18px; }
 }
