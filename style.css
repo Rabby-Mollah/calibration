@@ -63,57 +63,84 @@ body.loading { opacity: 0; }
 
 /* --- Mobile Specific Ratio Fix --- */
 
+/* --- Final Mobile-First Responsive Fix --- */
 @media (max-width: 768px) {
+    /* 1. Make the Navbar solid or very dark so it doesn't clash with the photo */
     .navbar {
-        padding: 0.5rem 0; /* Slimmer nav on mobile to save space */
+        position: relative; /* No longer floating over the photo on mobile */
+        background: var(--bg-dark);
+        padding: 1rem 0;
     }
 
+    .nav-container {
+        padding: 0 1.5rem;
+        justify-content: center; /* Centers logo for a cleaner mobile look */
+    }
+
+    .nav-links {
+        display: none; /* Keep links hidden for now unless you want a burger menu */
+    }
+
+    /* 2. Fix the Hero Section to show the FULL 16:9 Photo */
     .hero {
-        /* We change from 16/9 ratio to a slightly taller "Safe Ratio" 
-           to accommodate both the photo and the text below the nav */
-        min-height: 70vh; 
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start; /* Aligns content from the top down */
-        padding-top: 140px; /* HEAVY padding to push text way below the Nav Bar */
-        padding-bottom: 60px;
+        display: block; /* Stack elements vertically */
+        min-height: auto;
+        padding-top: 0; 
+        background: var(--bg-dark);
+    }
+
+    .hero-bg {
+        position: relative; /* Move it back into the normal flow */
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9; /* FORCES the 16:9 shape */
     }
 
     .hero-bg img {
-        object-fit: cover; 
-        object-position: center 10%; /* Shows the top-center of your 16:9 photo */
+        position: relative;
+        object-fit: contain; /* SHOWS EVERY PIXEL of your 16:9 photo */
+        width: 100%;
+        height: auto;
     }
 
+    .hero-overlay {
+        /* Subtle fade only at the bottom to transition into the text area */
+        background: linear-gradient(to bottom, transparent 70%, var(--bg-dark) 100%);
+    }
+
+    /* 3. Move the Text BELOW the photo so it never covers the image */
     .hero-content {
-        margin-top: 20px;
-        padding: 0 15px;
         position: relative;
-        z-index: 5;
+        margin-top: -20px; /* Slight overlap for a modern look */
+        padding: 2rem 1.5rem;
+        z-index: 10;
+        background: var(--bg-dark);
     }
 
     .hero-title {
-        font-size: 2.2rem; /* Compact title for mobile */
-        line-height: 1.1;
-        margin-bottom: 15px;
+        font-size: 2.5rem;
+        margin-bottom: 0.8rem;
     }
 
     .hero-tagline {
-        font-size: 1rem;
-        margin-bottom: 30px;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        color: var(--text-muted);
     }
 
-    /* Fix for the Event Buttons on Mobile */
+    /* 4. Fix Event Card spacing for mobile */
+    .events-grid {
+        gap: 1.5rem;
+    }
+
     .card-actions {
-        flex-direction: column; 
-        gap: 10px;
+        flex-direction: column;
     }
 
     .card-actions .btn {
-        width: 100%; /* Full width buttons are much easier to tap on phones */
-        padding: 12px;
+        width: 100%;
     }
 }
-
 /* Buttons */
 .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition); text-align: center; cursor: pointer; }
 .btn-gradient { background: var(--gradient-main); color: #fff; border: none; }
