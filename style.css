@@ -2,13 +2,14 @@
 :root {
     --primary-orange: #ff6b00;
     --primary-cyan: #00d9e6;
-    --bg-dark: #0a0a0f;
+    --second-orange: #f9b04a;
+    --bg-dark: #001822;
     --card-bg: rgba(255, 255, 255, 0.04);
     --card-border: rgba(255, 255, 255, 0.1);
     --text-main: #ffffff;
     --text-muted: #a0a0a0;
     --nav-height: 70px;
-    --gradient-main: linear-gradient(135deg, var(--primary-orange), var(--primary-cyan));
+    --gradient-main: linear-gradient(135deg, var(--primary-orange), var(--second-orange));
 }
 
 * {
@@ -218,7 +219,7 @@ body {
 .card-actions .btn { flex: 1; padding: 0.7rem 0.2rem; font-size: 0.8rem; }
 
 /* --- Contacts --- */
-.contacts { background: linear-gradient(135deg, var(--primary-cyan), var(--primary-orange)); padding: 5rem 0; }
+.contacts { background: linear-gradient(135deg, var(--second-orange), var(--primary-orange)); padding: 5rem 0; }
 .contact-card {
     background: white;
     color: black;
