@@ -12,6 +12,20 @@
     --gradient-main: linear-gradient(135deg, var(--primary-orange), var(--second-orange));
 }
 
+@font-face {
+    font-family: 'Norwester';
+    src: url('fonts/norwester.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+h1, h2, h3 {
+    font-family: 'Norwester', sans-serif;
+}
+
+body {
+    font-family: 'Norwester', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
