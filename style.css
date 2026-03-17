@@ -245,89 +245,75 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
-/* --- Hamburger Icon Styles --- */
+/* --- Desktop Navbar --- */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 2rem;
+}
+
+.nav-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
 .hamburger {
-    display: none; /* Hidden on Desktop */
-    flex-direction: column;
+    display: none; /* Hidden on PC */
     cursor: pointer;
-    gap: 6px;
-    z-index: 1100;
 }
 
-.hamburger span {
+.bar {
     display: block;
-    width: 28px;
+    width: 25px;
     height: 3px;
-    background: #fff;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
     border-radius: 10px;
-    transition: all 0.3s ease;
 }
 
-/* --- Mobile Menu Fixes --- */
+/* --- Mobile View Fix --- */
 @media (max-width: 768px) {
     .hamburger {
-        display: flex; /* Show only on Mobile */
+        display: block; /* Show icon on Mobile */
+        z-index: 1001;
     }
 
-    .nav-links {
+    /* This is the part that was "not showing" */
+    .nav-menu {
         position: fixed;
-        top: 0;
-        right: -100%; /* Start off-screen */
-        width: 70%;
-        height: 100vh;
-        background: rgba(10, 10, 15, 0.98);
-        backdrop-filter: blur(20px);
-        display: flex;
+        left: -100%; /* Hide off-screen to the left */
+        top: var(--nav-height);
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        z-index: 1050;
+        background: rgba(10, 10, 15, 0.95);
+        backdrop-filter: blur(15px);
+        width: 100%;
+        border-bottom: 1px solid var(--card-border);
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.5);
+        padding: 2rem 0;
+        z-index: 1000;
     }
 
-    .nav-links.active {
-        right: 0; /* Slide in */
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    /* When JS adds the 'active' class, it slides in! */
+    .nav-menu.active {
+        left: 0;
     }
 
-    .nav-links a {
+    .nav-menu li {
         margin: 1.5rem 0;
-        font-size: 1.2rem;
     }
 
-    /* Hamburger Animation to 'X' when active */
-    .hamburger.active span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-        background: var(--primary-cyan);
-    }
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-        background: var(--primary-cyan);
-    }
-}
-
-/* --- Mobile Overrides --- */
-@media (max-width: 768px) {
-    .nav-links { display: none; } /* Standard for mobile without burger menu */
-    
-    .hero {
-        padding-top: var(--nav-height); /* Stays below nav */
-    }
-
-    .hero-bg {
-        aspect-ratio: 16 / 9; /* Guaranteed 16:9 on mobile */
-    }
-
-    .hero-title { font-size: 2.2rem; }
-    
-    .events-grid {
-        grid-template-columns: 1fr; /* Single column on mobile */
-    }
-
-    .card-actions {
-        flex-direction: column; /* Stack buttons on phone */
-    }
+    /* Hamburger Animation to 'X' */
+    .hamburger.active .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--primary-cyan); }
+    .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--primary-cyan); }
 }
