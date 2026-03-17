@@ -43,7 +43,14 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
+<style>
+p {
+  margin: 5px 0; /* top & bottom = 5px */
+}
+</style>
 
+<p>First paragraph</p>
+<p>Second paragraph</p>
 .container {
     width: 100%;
     max-width: 1200px;
