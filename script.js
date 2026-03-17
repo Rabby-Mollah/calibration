@@ -22,20 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 });
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-const navItems = document.querySelectorAll('.nav-links a');
+const hamburger = document.querySelector("#hamburger");
+const navMenu = document.querySelector(".nav-menu");
 
-// Toggle Menu
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
 });
 
-// Close menu when a link is clicked (important for mobile UX)
-navItems.forEach(item => {
-    item.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-    });
-});
+// Important: Close menu when clicking a link
+document.querySelectorAll(".nav-menu a").forEach(n => n.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}));
