@@ -37,7 +37,7 @@ document.querySelectorAll(".nav-menu a").forEach(n => n.addEventListener("click"
 }));
 // --- Countdown Timer ---
 // Set your target end date here (Format: "Month DD, YYYY HH:MM:SS")
-const countDownDate = new Date("April 15, 2026 23:59:59").getTime(); 
+const countDownDate = new Date("March 22, 2026 23:59:59").getTime(); 
 
 const timerInterval = setInterval(() => {
     const now = new Date().getTime();
