@@ -232,17 +232,94 @@ body {
 
 .card-actions .btn { flex: 1; padding: 0.7rem 0.2rem; font-size: 0.8rem; }
 
-/* --- Contacts --- */
-.contacts { background: linear-gradient(135deg, var(--second-orange), var(--primary-orange)); padding: 5rem 0; }
-.contact-card {
-    background: white;
-    color: black;
-    padding: 3rem;
-    border-radius: 25px;
-    text-align: center;
-    max-width: 450px;
+/* --- Clean Contact Section --- */
+.contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 900px;
     margin: 0 auto;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* The Featured Card */
+.contact-card.featured {
+    background: linear-gradient(145deg, rgba(255, 107, 0, 0.05), rgba(0, 0, 0, 0.3));
+    border: 1px solid var(--primary-orange);
+    padding: 40px;
+    text-align: center;
+}
+
+.contact-card.featured h3 {
+    font-size: 1.8rem;
+    color: var(--primary-orange);
+    margin-bottom: 10px;
+}
+
+/* The Side-by-Side Row */
+.contact-sub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-cyan);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.contact-icon {
+    font-size: 2rem;
+    color: var(--primary-cyan);
+    margin-bottom: 15px;
+}
+
+.contact-icon.small-icon {
+    font-size: 1.5rem;
+}
+
+.role {
+    color: var(--primary-cyan);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--primary-orange);
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+    .contact-sub-grid {
+        grid-template-columns: 1fr; /* Stack on mobile */
+    }
+    
+    .contact-card.featured {
+        padding: 25px;
+    }
+
+    .contact-card.featured h3 {
+        font-size: 1.5rem;
+    }
 }
 
 /* --- Desktop Navbar --- */
