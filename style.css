@@ -317,3 +317,83 @@ body {
     .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--primary-cyan); }
     .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--primary-cyan); }
 }
+
+/* --- Announcement Banner --- */
+.announcement-banner {
+    display: block;
+    background: rgba(255, 107, 0, 0.1);
+    border: 1px solid var(--primary-orange);
+    color: var(--text-main);
+    text-decoration: none;
+    width: 90%;
+    max-width: 900px;
+    margin: -2rem auto 3rem auto; /* Pulls it up slightly over the hero section */
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.announcement-banner:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 107, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.2);
+    border-color: var(--second-orange);
+}
+
+.announcement-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.announcement-icon {
+    color: var(--primary-orange);
+    font-size: 1.5rem;
+    animation: ring 2s infinite;
+}
+
+/* Little bell ringing animation */
+@keyframes ring {
+    0%, 100% { transform: rotate(0deg); }
+    10% { transform: rotate(15deg); }
+    20% { transform: rotate(-10deg); }
+    30% { transform: rotate(5deg); }
+    40% { transform: rotate(-5deg); }
+    50% { transform: rotate(0deg); }
+}
+
+.announcement-text {
+    flex: 1;
+    font-size: 1.1rem;
+}
+
+.countdown-timer {
+    display: flex;
+    gap: 0.5rem;
+    font-family: 'Norwester', sans-serif;
+    font-size: 1.3rem;
+    color: var(--primary-cyan);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+}
+
+@media (max-width: 768px) {
+    .announcement-banner {
+        margin-top: 2rem;
+    }
+    .announcement-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .countdown-timer {
+        justify-content: center;
+        width: 100%;
+    }
+}
