@@ -35,3 +35,35 @@ document.querySelectorAll(".nav-menu a").forEach(n => n.addEventListener("click"
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
 }));
+// --- Countdown Timer ---
+// Set your target end date here (Format: "Month DD, YYYY HH:MM:SS")
+const countDownDate = new Date("April 15, 2026 23:59:59").getTime(); 
+
+const timerInterval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    // Time calculations
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    const countdownElement = document.getElementById("countdown");
+    
+    if (countdownElement) {
+        if (distance < 0) {
+            clearInterval(timerInterval);
+            countdownElement.innerHTML = "REGISTRATION CLOSED";
+            countdownElement.style.color = "var(--primary-orange)";
+        } else {
+            // Add leading zeros if number is less than 10
+            countdownElement.innerHTML = `
+                <span>${days < 10 ? '0' + days : days}d</span> : 
+                <span>${hours < 10 ? '0' + hours : hours}h</span> : 
+                <span>${minutes < 10 ? '0' + minutes : minutes}m</span> : 
+                <span>${seconds < 10 ? '0' + seconds : seconds}s</span>
+            `;
+        }
+    }
+}, 1000);
