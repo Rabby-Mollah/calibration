@@ -304,6 +304,24 @@ body {
 .contact-phone:hover {
     color: var(--primary-cyan);
 }
+.contact-custom-logo {
+    width: 35px; /* Adjust size to match the other icons */
+    height: auto;
+    object-fit: contain;
+    /* Optional: if the logo is very dark, you can add a small filter to make it pop */
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2)); 
+}
+
+/* Ensure the container stays aligned with an image */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 15px;
+    border-radius: 10px;
+}
 
 /* Quick Links (Icons Only) */
 .quick-links {
