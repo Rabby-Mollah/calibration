@@ -271,10 +271,11 @@ body {
 .contact-item {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
 }
 
